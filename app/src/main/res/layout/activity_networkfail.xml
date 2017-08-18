@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackground">
+
+    <ImageView
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:src="@drawable/network_fail"
+        android:layout_centerInParent="true"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="10dp">
+    <Button
+        android:id="@+id/btnWifi"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="روشن کردن وای فای"
+        android:layout_weight="1"/>
+    <Button
+        android:id="@+id/btnRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:text="تلاش مجدد"
+        android:layout_weight="1"/>
+    </LinearLayout>
+</RelativeLayout>

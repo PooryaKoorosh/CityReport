@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/register_relative_layout">
+
+
+
+    <EditText
+        android:id="@+id/edEmail"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="ایمیل"
+        android:inputType="textEmailAddress"/>
+
+    <EditText
+        android:id="@+id/edUsername"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="نام کاربری"
+        android:inputType="text"
+        android:layout_below="@id/edEmail"/>
+
+    <EditText
+        android:id="@+id/edName"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="نام"
+        android:inputType="text"
+        android:layout_below="@id/edUsername"/>
+
+    <EditText
+        android:id="@+id/edPassword"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="کلمه عبور"
+        android:inputType="textPassword"
+        android:layout_below="@id/edName"/>
+
+    <EditText
+        android:id="@+id/edPasswordRepeat"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:hint="تکرار کلمه عبور"
+        android:inputType="textPassword"
+        android:layout_below="@id/edPassword"/>
+
+    <Button
+        android:id="@+id/FinalRegisterBtn"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@id/edPasswordRepeat"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:text="ثبت نام"
+        android:onClick="ClickListener"/>
+
+</RelativeLayout>

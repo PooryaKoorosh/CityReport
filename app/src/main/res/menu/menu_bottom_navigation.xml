@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_home"
+        android:checked="true"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="خانه"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_add"
+        android:checked="true"
+        android:icon="@drawable/ic_add_black_24dp"
+        android:title="افزودن"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_settings"
+        android:checked="false"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="تنظیمات"
+        app:showAsAction="ifRoom" />
+</menu>
