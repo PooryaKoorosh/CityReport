@@ -385,9 +385,12 @@ public class AddFragment extends Fragment implements View.OnClickListener {
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
 
+        G.setCustomTypeface(spinner);
         final EditText edTitle = (EditText)popup.findViewById(R.id.edTitle);
         final EditText edDescription = (EditText)popup.findViewById(R.id.edDescription);
 
+        G.setCustomTypeface(edTitle);
+        G.setCustomTypeface(edDescription);
 
         switch (G.PointPostMode)
         {
@@ -426,6 +429,10 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                     }
             }
         });
+
+        G.setCustomTypeface(popup.findViewById(R.id.ReportBtn));
+        G.setCustomTypeface(popup.findViewById(R.id.btnDocumentChoose));
+        G.setCustomTypeface(popup.findViewById(R.id.PopupTitle));
 
         popup.findViewById(R.id.ReportBtn).setOnClickListener(new View.OnClickListener() {
             @Override

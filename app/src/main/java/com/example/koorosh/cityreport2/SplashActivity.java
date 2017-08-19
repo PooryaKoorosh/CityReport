@@ -62,7 +62,7 @@ public class SplashActivity extends Activity {
                     G.activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(SplashActivity.this, G.SUCCESS, Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(SplashActivity.this, G.SUCCESS, Toast.LENGTH_SHORT).show();
                             try {
                                 parseJson(res);
                                 Intent intent = new Intent(SplashActivity.this,LauncherActivity.class);

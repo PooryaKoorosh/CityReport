@@ -5,7 +5,12 @@ import android.app.Application;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -16,6 +21,7 @@ import cn.pedant.SweetAlert.SweetAlertDialog;
  */
 
 public class G extends Application{
+public static Typeface yekan;
 
     public static String server="http://pk.pabbasi.ir/";
     private static String RegisterUrl = "http://pk.pabbasi.ir/register.php?user={0}&email={1}&pass={2}&name={3}";
@@ -131,5 +137,21 @@ public class G extends Application{
     @Override
     public void onCreate() {
         super.onCreate();
+    }
+
+    public static void setCustomTypeface(View view) {
+        yekan=Typeface.createFromAsset(G.context.getAssets(),"fonts/yekan.TTF");
+        Typeface typeFace=yekan;
+        if (view instanceof TextView) {
+            ((TextView)view).setTypeface(typeFace);
+        } else if (view instanceof EditText) {
+            ((EditText)view).setTypeface(typeFace);
+        } else if (view instanceof ViewGroup) {
+            ViewGroup viewGroup = (ViewGroup)view;
+            int count = viewGroup.getChildCount();
+            for (int i = 0; i < count; i++) {
+                setCustomTypeface(viewGroup.getChildAt(i));
+            }
+        }
     }
 }

@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="50dp"
-    android:padding="20dp">
+    android:layout_height="match_parent"
+    android:layout_margin="25dp"
+    android:padding="10dp">
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
     <TextView
         android:id="@+id/PopupTitle"
         android:layout_width="wrap_content"
@@ -25,25 +25,27 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/PopupTitle"
+        android:layout_marginBottom="30dp"
         android:layout_marginTop="10dp"
         android:background="#6c6c6c" />
 
         <EditText
             android:id="@+id/edTitle"
-            android:layout_width="300dp"
-            android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:maxLines="1"
             android:layout_below="@id/line"
             android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
             android:hint="عنوان"
             android:inputType="text"/>
 
         <EditText
             android:id="@+id/edDescription"
-            android:layout_width="300dp"
-            android:layout_height="100dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:inputType="textMultiLine"
-            android:lines="8"
-            android:minLines="6"
+            android:lineSpacingMultiplier="1.5"
             android:gravity="top|right"
             android:maxLines="10"
             android:scrollbars="vertical"
@@ -55,8 +57,9 @@
             android:id="@+id/spProblems"
             android:layout_width="300dp"
             android:layout_height="30dp"
+            android:layout_marginBottom="20dp"
             android:layout_below="@id/edDescription"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="20dp"/>
 
 
         <Button
@@ -65,10 +68,22 @@
             android:layout_height="match_parent"
             android:text="ارسال عکس"
             android:layout_weight="1"
+            android:textColor="#fff"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
+            android:background="@drawable/buttons"
+            android:layout_marginBottom="20dp"
             android:visibility="gone"
             android:layout_below="@id/spProblems"/>
+
+        <View
+            android:id="@+id/line2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_below="@id/btnDocumentChoose"
+            android:layout_marginBottom="30dp"
+            android:layout_marginTop="10dp"
+            android:background="#6c6c6c" />
 
         <Button
             android:id="@+id/ReportBtn"
@@ -76,7 +91,12 @@
             android:layout_height="60dp"
             android:layout_below="@id/btnDocumentChoose"
             android:layout_marginTop="20dp"
-            android:text="گزارش مشکل"/>
+            android:background="@drawable/buttons"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:text="ارسال گزارش"/>
 
     </RelativeLayout>
     </ScrollView>
