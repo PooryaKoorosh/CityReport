@@ -12,14 +12,17 @@
         android:id="@+id/login_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/buttons"
         android:text="ورود"
+        android:layout_margin="5dp"
         />
     <Button
         android:id="@+id/register_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ثبت نام"
-        android:layout_toRightOf="@id/login_btn"
+        android:background="@drawable/buttons_border"
+        android:layout_margin="5dp"
         />
     </LinearLayout>
 </RelativeLayout>

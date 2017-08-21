@@ -39,11 +39,13 @@
         android:id="@+id/edPassword"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:hint="کلمه عبور"
         android:inputType="textPassword"
-        android:layout_below="@id/edName"/>
+        android:gravity="right"
+        android:layout_below="@+id/edName"
+        android:layout_alignLeft="@+id/edName"
+        android:layout_alignStart="@+id/edName" />
 
     <EditText
         android:id="@+id/edPasswordRepeat"
@@ -52,6 +54,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:hint="تکرار کلمه عبور"
+        android:gravity="right"
         android:inputType="textPassword"
         android:layout_below="@id/edPassword"/>
 
@@ -63,6 +66,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
         android:text="ثبت نام"
-        android:onClick="ClickListener"/>
+        android:onClick="onClick"
+        android:background="@drawable/buttons"/>
 
 </RelativeLayout>

@@ -7,7 +7,8 @@
     <com.google.android.gms.maps.MapView
         android:id="@+id/mapView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:paddingTop="20dp"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/VideoFab"
@@ -17,7 +18,9 @@
         app:elevation="4dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:visibility="invisible"
         android:layout_marginBottom="170dp" />
 
@@ -29,7 +32,9 @@
         app:elevation="4dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:visibility="invisible"
         android:layout_marginBottom="120dp"/>
 
@@ -41,7 +46,9 @@
         app:elevation="4dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:visibility="invisible"
         android:layout_marginBottom="70dp"
         />
@@ -54,6 +61,8 @@
         app:elevation="4dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:layout_marginBottom="10dp"/>
 </RelativeLayout >
