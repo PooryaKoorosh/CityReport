@@ -99,6 +99,13 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     if (ResponseJsonParser(response)) {
                         startActivity(new Intent(getApplicationContext(), MainActivity.class));
                         finish();
+                    }else if(response.equals("invalid")){
+                        G.activity.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(LoginActivity.this, "اطلاعات وارد شده صحیح نمی باشد", Toast.LENGTH_SHORT).show();
+                            }
+                        });
                     } else {
                         G.activity.runOnUiThread(new Runnable() {
                             @Override
@@ -140,8 +147,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
             for (int i = 0 ; i < posts_array.length() ; i++) {
                 StructPosts structPosts = new StructPosts();
             structPosts.id = posts_array.getJSONObject(i).getString("id");
-            structPosts.types = GetTypesById(Integer.parseInt(posts_array.getJSONObject(i).getString("type")));
-                structPosts.title = posts_array.getJSONObject(i).getString("title");
+            structPosts.type = posts_array.getJSONObject(i).getString("type");
                 structPosts.text = posts_array.getJSONObject(i).getString("text");
                 structPosts.lat = Double.parseDouble(posts_array.getJSONObject(i).getString("lat"));
                 structPosts.lng = Double.parseDouble(posts_array.getJSONObject(i).getString("lng"));
@@ -150,8 +156,8 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
 
             return true;
-        } catch (JSONException e) {
-            e.printStackTrace();
+        } catch ( Exception ex) {
+            ex.printStackTrace();
             return false;
         }
     }

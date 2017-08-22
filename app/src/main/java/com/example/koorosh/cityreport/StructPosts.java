@@ -7,8 +7,7 @@ package com.example.koorosh.cityreport;
 public class StructPosts {
 
     public String id;
-    public StructTypes types;
-    public String title;
+    public String type;
     public String text;
     public double lat;
     public double lng;

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
@@ -16,14 +17,13 @@ import android.view.MenuItem;
 import com.example.koorosh.cityreport.Fragment.AddFragment;
 import com.example.koorosh.cityreport.Fragment.HomeFragment;
 import com.example.koorosh.cityreport.Fragment.ProfileFragment;
-
-
+import com.roughike.bottombar.BottomBar;
+import com.roughike.bottombar.OnTabSelectListener;
 
 
 public class MainActivity extends AppCompatActivity {
 
 
-    BottomNavigationView bottomNavigationView;
 
     private ViewPager viewPager;
     HomeFragment homeFragment;
@@ -48,26 +48,26 @@ public class MainActivity extends AppCompatActivity {
         viewPager = (ViewPager) findViewById(R.id.viewpager);
 
         //Initializing the bottomNavigationView
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottom_navigation);
 
-        bottomNavigationView.setOnNavigationItemSelectedListener(
-                new BottomNavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                        switch (item.getItemId()) {
-                            case R.id.action_home:
-                                viewPager.setCurrentItem(0);
-                                break;
-                            case R.id.action_add:
-                                viewPager.setCurrentItem(1);
-                                break;
-                            case R.id.action_settings:
-                                viewPager.setCurrentItem(2);
-                                break;
-                        }
-                        return false;
-                    }
-                });
+
+        BottomBar bar=(BottomBar)findViewById(R.id.bottom_navigation);
+        G.setCustomTypeface(bar);
+        bar.setOnTabSelectListener(new OnTabSelectListener() {
+            @Override
+            public void onTabSelected(@IdRes int tabId) {
+                switch (tabId) {
+                    case R.id.action_home:
+                        viewPager.setCurrentItem(0);
+                        break;
+                    case R.id.action_add:
+                        viewPager.setCurrentItem(1);
+                        break;
+                    case R.id.action_settings:
+                        viewPager.setCurrentItem(2);
+                        break;
+                }
+            }
+        });
 
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -77,16 +77,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if (prevMenuItem != null) {
-                    prevMenuItem.setChecked(false);
-                }
-                else
-                {
-                    bottomNavigationView.getMenu().getItem(0).setChecked(false);
-                }
-                Log.d("page", "onPageSelected: "+position);
-                bottomNavigationView.getMenu().getItem(position).setChecked(true);
-                prevMenuItem = bottomNavigationView.getMenu().getItem(position);
 
             }
 

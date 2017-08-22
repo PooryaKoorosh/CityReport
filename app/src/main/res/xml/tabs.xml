@@ -1,0 +1,28 @@
+<tabs>
+
+
+    <tab
+        id="@+id/action_home"
+        icon="@drawable/ic_home_black_24dp"
+        title="خانه"
+        barColorWhenSelected="@color/colorPrimary"
+         />
+
+
+    <tab
+        id="@+id/action_add"
+        icon="@drawable/ic_add_black_24dp"
+        title="افزودن"
+        barColorWhenSelected="@color/colorPrimary"
+         />
+
+    <tab
+        id="@+id/action_settings"
+        icon="@drawable/ic_person_black_24dp"
+        title="پروفایل"
+        barColorWhenSelected="@color/colorPrimary"
+         />
+
+
+
+</tabs>

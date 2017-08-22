@@ -103,7 +103,11 @@ public static Typeface yekan;
         G.activity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                alertDialog.dismissWithAnimation();
+                try {
+                    alertDialog.dismissWithAnimation();
+                }catch (Exception ex){
+
+                }
             }
         });
 
@@ -130,15 +134,15 @@ public static Typeface yekan;
         }
     }
 
-    public static StructTypes GetTypesById(int id)
+    public static String GetTypesById(int id)
     {
         for(int i=0;i<G.types.size();i++) {
             if (G.types.get(i).id.equals(id+"")){
                 Log.e("GetTypesById: ", id+"");
-                return G.types.get(i);
+                return G.types.get(i).title;
             }
         }
-        return  G.types.get(0);
+        return  G.types.get(0).title;
     }
 
 

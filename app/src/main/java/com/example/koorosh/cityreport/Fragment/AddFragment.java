@@ -89,6 +89,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
     Dialog popup = null;
     Dialog camordevice;
     Marker mk = null;
+
      LocationListener locationListener = new LocationListener() {
          @Override
          public void onLocationChanged(Location location) {
@@ -137,7 +138,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
         View rootView = inflater.inflate(R.layout.fragment_add, container, false);
         if(!isLocationEnabled(getContext())) {
-            Toast.makeText(getContext(), "here2", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "ERROR", Toast.LENGTH_SHORT).show();
             getActivity().finish();
             System.exit(0);
         }
@@ -187,27 +188,30 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                         // fetch last location if any from provider - GPS.
                         final LocationManager locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
                         final Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    if(loc != null)
-                    {
-                        latitude = loc.getLatitude();
-                        longitude = loc.getLongitude();
-                        G.HideLoading();
-
-                        LatLng here = new LatLng(latitude, longitude);
-                        mk = googleMap.addMarker(new MarkerOptions().position(here).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker)));
-
-                        // For zooming automatically to the location of the marker
-                        CameraPosition cameraPosition = new CameraPosition.Builder().target(here).zoom(16).build();
-                        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
-                    }
-                    else{
+                    Log.d("DIFF LOCS",loc.toString()+" ");
+                        Log.d("DIFF LOCS",locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).toString()+"  ");
+//                    if(!loc.toString().equals(""))
+//                    {
+//                        Log.d("MAP","USING LAST KNOWN LOCATION YO");
+//                        latitude = loc.getLatitude();
+//                        longitude = loc.getLongitude();
+//                        G.HideLoading();
+//                        Log.d("TAG"," LNG : "+longitude+"   LAT : "+latitude);
+//                        LatLng here = new LatLng(latitude, longitude);
+//                        mk = googleMap.addMarker(new MarkerOptions().position(here).icon(BitmapDescriptorFactory.fromResource(R.mipmap.marker)));
+//
+//                        // For zooming automatically to the location of the marker
+//                        CameraPosition cameraPosition = new CameraPosition.Builder().target(here).zoom(16).build();
+//                        googleMap. animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                    }
+//                    else{
                         //no recent request for location found so we request for location
                         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
                         locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
                         criteria = new Criteria();
-                        locationManager.requestLocationUpdates(String.valueOf(locationManager.getBestProvider(criteria, true)).toString(), 0, 0, locationListener);
+                        locationManager.requestLocationUpdates(locationManager.getBestProvider(criteria, true), 0, 0, locationListener);
 
-                    }
+//                    }
 
                 } else askPermission();
 
@@ -224,11 +228,10 @@ public class AddFragment extends Fragment implements View.OnClickListener {
             // For dropping a marker at a point on the Map
             StructPosts structPosts = G.posts.get(i);
             LatLng place = new LatLng(structPosts.lat, structPosts.lng);
-            Log.e("onMapReady2: ", structPosts.lat + " : " + structPosts.lng + " : " + structPosts.types.id);
             Marker mk = googleMap.addMarker(new MarkerOptions().position(place)
-                    .title(structPosts.title).snippet(structPosts.text)
+                    .title(G.GetTypesById(Integer.valueOf(structPosts.type))).snippet(structPosts.text)
                     .draggable(false)
-                    .icon(BitmapDescriptorFactory.fromResource(G.GetProperIcon(Integer.parseInt(structPosts.types.id)))));
+                    .icon(BitmapDescriptorFactory.fromResource(G.GetProperIcon(Integer.parseInt(structPosts.type)))));
 
             mk.hideInfoWindow();
 
@@ -478,7 +481,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClick(View view) {
                 //token={0}&title={1}&text={2}&type={3}&lat={4}&lng={5}&image={6{&video={7}
-                if (edTitle.getText().toString().equals("") || edDescription.getText().toString().equals("")) {
+                if (edDescription.getText().toString().equals("")) {
                     Toast.makeText(getActivity(), "لطفا تمامی اطلاعات خواسته شده را تکمیل بفرمایید", Toast.LENGTH_SHORT).show();
                 }
                 else{
@@ -491,14 +494,14 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                     }
                     if (G.PointPostMode == 0) {
 
-                        ReportPointSimple(Token, edTitle.getText().toString(), edDescription.getText().toString()
+                        ReportPointSimple(Token, edDescription.getText().toString()
                                 , type, String.valueOf(latitude), String.valueOf(longitude));
                         Log.e("onClick: ", String.valueOf(spinner.getSelectedItemId() + 1));
                     } else {
                         if (G.ChoosedDocument) {
 
 
-                            ReportPointAdvanced(Token, edTitle.getText().toString(), edDescription.getText().toString()
+                            ReportPointAdvanced(Token, edDescription.getText().toString()
                                     , type, String.valueOf(latitude), String.valueOf(longitude));
                         } else {
                             Toast.makeText(getActivity(), "لطفا یک فایل ضمیمه انتخاب کنید", Toast.LENGTH_SHORT).show();
@@ -554,12 +557,12 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void ReportPointAdvanced(String Token , String Title , String Text , String Type , String Lat , String Lng) {
+    private void ReportPointAdvanced(String Token , String Text , String Type , String Lat , String Lng) {
 
         if(G.PointPostMode == 1)
         {
             try {
-                uploadImageFile(Title, Text, Lat, Lng, Type, Token);
+                uploadImageFile( Text, Lat, Lng, Type, Token);
             }catch (Exception ex){
                 G.activity.runOnUiThread(new Runnable() {
                     @Override
@@ -572,7 +575,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
         else if (G.PointPostMode == 2)
         {
             try {
-                uploadVideoFile(Title, Text, Lat, Lng, Type, Token);
+                uploadVideoFile( Text, Lat, Lng, Type, Token);
             }catch (Exception ex){
                 G.activity.runOnUiThread(new Runnable() {
                     @Override
@@ -585,10 +588,9 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void ReportPointSimple(String Token ,final String Title ,final String Text ,final String Type ,final String Lat ,final String Lng){
+    private void ReportPointSimple(String Token  ,final String Text ,final String Type ,final String Lat ,final String Lng){
         AndroidNetworking.post(G.GetReportPointSimpleUrl())
                 .addBodyParameter("token",Token)
-                .addBodyParameter("title",Title)
                 .addBodyParameter("text",Text)
                 .addBodyParameter("type",Type)
                 .addBodyParameter("lat",Lat)
@@ -603,7 +605,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                         Log.e("onResponse3: ", response);
                         Toast.makeText(getActivity(), "نظر شما ثبت شد", Toast.LENGTH_SHORT).show();
                         //add marker to map
-                        AddNewPointMarker(Double.parseDouble(Lat) , Double.parseDouble(Lng),Title,Text,Type);
+                        AddNewPointMarker(Double.parseDouble(Lat) , Double.parseDouble(Lng),Text,Type);
                     }
 
                     @Override
@@ -687,7 +689,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void uploadImageFile(final String title,final String text,final String lat,final String lng,final String type,String token){
+    private void uploadImageFile(final String text,final String lat,final String lng,final String type,String token){
         G.ShowLoading(new DialogInterface.OnCancelListener() {
             @Override
             public void onCancel(DialogInterface dialog) {
@@ -695,7 +697,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
             }
         });
         String url=G.server+"add-image.php";
-        ContentValues cv=new ContentValues();cv.put("title",title);cv.put("text",text);cv.put("lat",lat);cv.put("lng",lng);
+        ContentValues cv=new ContentValues();cv.put("text",text);cv.put("lat",lat);cv.put("lng",lng);
         cv.put("token",token);
         cv.put("type",type);
         Log.d("PATH",path);
@@ -711,7 +713,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                     public void run() {
                         Toast.makeText(G.context, G.SUCCESS, Toast.LENGTH_SHORT).show();
                         //add marker to map
-                        AddNewPointMarker(Double.parseDouble(lat) , Double.parseDouble(lng),title,text,type);
+                        AddNewPointMarker(Double.parseDouble(lat) , Double.parseDouble(lng),text,type);
                         popup.dismiss();
                     }
                 });
@@ -738,7 +740,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    private void uploadVideoFile(final String title, final String text, final String lat, final String lng, final String type, String token){
+    private void uploadVideoFile( final String text, final String lat, final String lng, final String type, String token){
        G.ShowLoading(new DialogInterface.OnCancelListener() {
            @Override
            public void onCancel(DialogInterface dialog) {
@@ -757,7 +759,7 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
         Log.d("finalPath",file.getAbsolutePath()+file.getName());
         String mimetype="video";
-        ContentValues cv=new ContentValues();cv.put("title",title);cv.put("text",text);cv.put("lat",lat);cv.put("lng",lng);
+        ContentValues cv=new ContentValues();cv.put("text",text);cv.put("lat",lat);cv.put("lng",lng);
         cv.put("token",token);
         cv.put("type",type);
         Gonnect.upload(url, cv,"post","video", file.getName(), mimetype, file, new Gonnect.ResponseSuccessListener() {
@@ -767,13 +769,12 @@ public class AddFragment extends Fragment implements View.OnClickListener {
                         G.HideLoading();
                         String res = response.trim();
                         Log.d("RES123", res);
-                        //Vaqti Movafaq shod ye kari bokon  ==> mikhay bokoshamesh???
                         //add marker to map
                 G.activity.runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                         Toast.makeText(G.context, G.SUCCESS, Toast.LENGTH_SHORT).show();
-                                AddNewPointMarker(Double.parseDouble(lat), Double.parseDouble(lng), title, text, type);
+                                AddNewPointMarker(Double.parseDouble(lat), Double.parseDouble(lng),  text, type);
                             }
                 });
                         popup.dismiss();
@@ -784,7 +785,6 @@ public class AddFragment extends Fragment implements View.OnClickListener {
             @Override
             public void responseFailed(IOException exception) {
                 Log.d("ERR123",exception.getMessage().toString());
-                //Vaqti Error Dad Yekari bokon   ==> mikay bokoshamesh???
                 G.HideLoading();
                 G.activity.runOnUiThread(new Runnable() {
                     @Override
@@ -809,10 +809,10 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
     }
 
-    public void AddNewPointMarker(double lat,double lng, String Title ,String Text, String TypeId)
+    public void AddNewPointMarker(double lat,double lng, String Text, String TypeId)
     {
         googleMap.addMarker(new MarkerOptions().position(new LatLng(lat,lng))
-                .title(Title).snippet(Text)
+                .title(G.GetTypesById(Integer.valueOf(TypeId))).snippet(Text)
                 .draggable(false)
                 .icon(BitmapDescriptorFactory.fromResource(G.GetProperIcon(Integer.parseInt(TypeId)))));
     }

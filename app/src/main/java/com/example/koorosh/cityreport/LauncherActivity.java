@@ -20,6 +20,7 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.androidnetworking.AndroidNetworking;
@@ -35,12 +36,15 @@ import java.io.IOException;
  */
 
 public class LauncherActivity extends Activity {
+    TextView welcome;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
         G.context=this;
         G.activity=this;
+        welcome=(TextView)findViewById(R.id.textView3);
+        G.setCustomTypeface(welcome);
 
 String message = getIntent().getStringExtra("message");
 
@@ -166,6 +170,7 @@ String message = getIntent().getStringExtra("message");
     }
 
     private void ChooseAction() {
+        G.setCustomTypeface(findViewById(R.id.login_btn));
         findViewById(R.id.login_btn).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -174,6 +179,8 @@ String message = getIntent().getStringExtra("message");
                 finish();
             }
         });
+
+        G.setCustomTypeface(findViewById(R.id.register_btn));
 
         findViewById(R.id.register_btn).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -246,8 +253,7 @@ String message = getIntent().getStringExtra("message");
             for (int i = 0 ; i < posts_array.length() ; i++) {
                 StructPosts structPosts = new StructPosts();
                 structPosts.id = posts_array.getJSONObject(i).getString("id");
-                structPosts.types = G.GetTypesById(Integer.parseInt(posts_array.getJSONObject(i).getString("type")));
-                structPosts.title = posts_array.getJSONObject(i).getString("title");
+                structPosts.type = posts_array.getJSONObject(i).getString("type");
                 structPosts.text = posts_array.getJSONObject(i).getString("text");
                 structPosts.lat = Double.parseDouble(posts_array.getJSONObject(i).getString("lat"));
                 structPosts.lng = Double.parseDouble(posts_array.getJSONObject(i).getString("lng"));
@@ -256,7 +262,7 @@ String message = getIntent().getStringExtra("message");
 
 
             return true;
-        } catch (JSONException e) {
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }

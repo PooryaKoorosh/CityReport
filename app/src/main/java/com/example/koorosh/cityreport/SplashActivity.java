@@ -149,8 +149,7 @@ public class SplashActivity extends Activity {
                 try {
                     StructPosts structPosts = new StructPosts();
                     structPosts.id = all_post.getJSONObject(i).getString("id");
-                    structPosts.types = G.GetTypesById(Integer.parseInt(all_post.getJSONObject(i).getString("type")));
-                    structPosts.title = all_post.getJSONObject(i).getString("title");
+                    structPosts.type = all_post.getJSONObject(i).getString("type");
                     structPosts.text = all_post.getJSONObject(i).getString("text");
                     structPosts.lat = Double.parseDouble(all_post.getJSONObject(i).getString("lat"));
                     structPosts.lng = Double.parseDouble(all_post.getJSONObject(i).getString("lng"));
@@ -163,7 +162,8 @@ public class SplashActivity extends Activity {
             }
 
             return true;
-        } catch (JSONException e) {
+        } catch (Exception e) {
+
             e.printStackTrace();
             return  false;
         }

@@ -57,16 +57,23 @@ public class HomeFragment extends Fragment {
 
                 LatLng place = null;
 
+                LatLng iran=new LatLng(32.4279,53.6880);
+                CameraPosition cameraPosition = new CameraPosition.Builder().target(iran).zoom(5).build();
+                googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
+
                 for(int i=0 ; i < G.all_posts.size() ; i++)
                 {
                     // For dropping a marker at a point on the Map
                     StructPosts structPosts = G.all_posts.get(i);
                      place = new LatLng(structPosts.lat, structPosts.lng);
-                    Log.e("onMapReady2: ", structPosts.lat + " : " + structPosts.lng + " : " + structPosts.types.id);
+//                    Log.e("onMapReady2: ", structPosts.lat + " : " + structPosts.lng + " : " + structPosts.types.id);
+                    String title;
+                    title=G.GetTypesById(Integer.valueOf(structPosts.type));
                  Marker mk = googleMap.addMarker(new MarkerOptions().position(place)
-                            .title(structPosts.title).snippet(structPosts.text)
+                            .title(title).snippet(structPosts.text)
                             .draggable(false)
-                            .icon(BitmapDescriptorFactory.fromResource(G.GetProperIcon(Integer.parseInt(structPosts.types.id)))));
+                            .icon(BitmapDescriptorFactory.fromResource(G.GetProperIcon(Integer.parseInt(structPosts.type)))));
 
                     mk.hideInfoWindow();
 
@@ -85,8 +92,8 @@ public class HomeFragment extends Fragment {
 
                 if(place != null) {
                     // For zooming automatically to the location of the marker
-                    CameraPosition cameraPosition = new CameraPosition.Builder().target(place).zoom(16).build();
-                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+//                    CameraPosition cameraPosition = new CameraPosition.Builder().target(place).zoom(16).build();
+//                    googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
                 }
 
             }
