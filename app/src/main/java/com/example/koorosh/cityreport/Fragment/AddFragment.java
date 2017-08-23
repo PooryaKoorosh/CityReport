@@ -187,9 +187,9 @@ public class AddFragment extends Fragment implements View.OnClickListener {
 
                         // fetch last location if any from provider - GPS.
                         final LocationManager locationManager = (LocationManager) getActivity().getSystemService(LOCATION_SERVICE);
-                        final Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    Log.d("DIFF LOCS",loc.toString()+" ");
-                        Log.d("DIFF LOCS",locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).toString()+"  ");
+                       // final Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+//                    Log.d("DIFF LOCS",loc.toString()+" ");
+                      //  Log.d("DIFF LOCS",locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER).toString()+"  ");
 //                    if(!loc.toString().equals(""))
 //                    {
 //                        Log.d("MAP","USING LAST KNOWN LOCATION YO");

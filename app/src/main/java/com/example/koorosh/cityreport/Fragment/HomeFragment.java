@@ -67,7 +67,7 @@ public class HomeFragment extends Fragment {
                     // For dropping a marker at a point on the Map
                     StructPosts structPosts = G.all_posts.get(i);
                      place = new LatLng(structPosts.lat, structPosts.lng);
-//                    Log.e("onMapReady2: ", structPosts.lat + " : " + structPosts.lng + " : " + structPosts.types.id);
+             Log.e("onMapReady2: ", structPosts.lat + " : " + structPosts.lng);
                     String title;
                     title=G.GetTypesById(Integer.valueOf(structPosts.type));
                  Marker mk = googleMap.addMarker(new MarkerOptions().position(place)

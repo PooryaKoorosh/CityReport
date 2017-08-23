@@ -19,9 +19,9 @@
         android:allowBackup="true"
         android:name=".G"
         tools:replace="android:icon,android:supportsRtl"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/city_report_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/city_report_icon"
         android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity"  android:screenOrientation="portrait"/>
